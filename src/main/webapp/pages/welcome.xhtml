@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Уточка</title>
+    <link rel="stylesheet" href="http://localhost:8080/lab3-12/resources/css/style.css"/>
+</h:head>
+<h:body onload="draw(); points();">
+    <div class="header">P3201 Камышников Владислав Вариант 20173</div>
+    <div class="layout">
+        <div class="col1">
+            <div class="realBox">
+                <h:form>
+                    <h:commandLink value="&lt;&lt;Вернуться" action="#{routerBean.routeOnClock()}"/>
+                </h:form>
+
+            </div>
+        </div>
+        <div class="col2">
+            <div class="realBox" id="col2row1">
+                <canvas id="canvas" width="350" height="350">Тут мог бы быть канвас, но браузер ЛОХ!</canvas>
+                <canvas id="canvasForPoints" width="350" height="350">Тут мог бы быть канвас, но браузер ЛОХ!</canvas>
+                <canvas id="canvasForAllegedPoint" width="350" height="350">Тут мог бы быть канвас, но браузер ЛОХ!
+                </canvas>
+            </div>
+            <div class="realBox" id="col2row2">
+                <h:dataTable id="mainTabel" value="#{connectorCDI.getAll()}" var="point" name="mainTabel"
+                             styleClass="order-table"
+                             headerClass="order-table-header" rowClasses="order-table-odd-row,order-table-even-row">
+                    <h:column>
+                        <f:facet name="header">X</f:facet>
+                        #{point.x}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Y</f:facet>
+                        #{point.y}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">R</f:facet>
+                        #{point.r}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Hit</f:facet>
+                        #{point.hitable}
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </div>
+        <div class="col3">
+            <div class="realBox">
+                <h:form id="form">
+                    X:<h:commandLink id="X-4" value="-4" name="LinkX[]" action="#{connectorCDI.setM4X()}"
+                                     onclick="onClickX(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <h:commandLink id="X-3" value="-3" name="LinkX[]" action="#{connectorCDI.setM3X()}"
+                                   onclick="onClickX(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <h:commandLink id="X-2" value="-2" name="LinkX[]" action="#{connectorCDI.setM2X()}"
+                                   onclick="onClickX(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <h:commandLink id="X-1" value="-1" name="LinkX[]" action="#{connectorCDI.setM1X()}"
+                                   onclick="onClickX(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <h:commandLink id="X0" value="0" name="LinkX[]" action="#{connectorCDI.set0X()}"
+                                   onclick="onClickX(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <h:commandLink id="X1" value="1" name="LinkX[]" action="#{connectorCDI.set1X()}"
+                                   onclick="onClickX(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <h:commandLink id="X2" value="2" name="LinkX[]" action="#{connectorCDI.set2X()}"
+                                   onclick="onClickX(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <h:commandLink id="X3" value="3" name="LinkX[]" action="#{connectorCDI.set3X()}"
+                                   onclick="onClickX(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <h:commandLink id="X4" value="4" name="LinkX[]" action="#{connectorCDI.set4X()}"
+                                   onclick="onClickX(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    Y:<h:inputText id="Y" value="#{connectorCDI.y}" onkeyup="proverka2(this);"/>
+                    <div id="messageAboutError" style="display: inline"></div>
+                    <br/>
+                    R:<h:commandLink id="R1" value="1" name="LinkR[]" action="#{connectorCDI.set1R()}"
+                                     onclick="onClickR(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <h:commandLink id="R2" value="1.5" name="LinkR[]" action="#{connectorCDI.set15R()}"
+                                   onclick="onClickR(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <h:commandLink id="R3" value="2" name="LinkR[]" action="#{connectorCDI.set2R()}"
+                                   onclick="onClickR(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <h:commandLink id="R4" value="2.5" name="LinkR[]" action="#{connectorCDI.set25R()}"
+                                   onclick="onClickR(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <h:commandLink id="R5" value="3" name="LinkR[]" action="#{connectorCDI.set3R()}"
+                                   onclick="onClickR(event)"><f:ajax render=":mainTabel"/></h:commandLink>
+                    <br/><br/>
+                    <h:commandLink id="checker" action="#{connectorCDI.pointCheck()}" styleClass="linkForButton" style="display: none;">
+                        <div class="button">Check</div>
+                    </h:commandLink>
+                    <h:commandLink id="checker2" action="#{connectorCDI.pointCheck()}" styleClass="linkForButton">
+                        <f:ajax execute="Y" render="mainTabel"/>
+                        <div class="button">Check</div>
+                    </h:commandLink>
+                    <h:commandLink id="cleaner" action="#{connectorCDI.clearSession()}" styleClass="linkForButton">
+                        <div class="button">ClearAll</div>
+                    </h:commandLink>
+                    <br/>
+                    <p:commandButton id="checker3" update="mainTabel" action="#{connectorCDI.pointCheck()}" styleClass="button"
+                     icon="pi pi-check" value="check3"  style="display: none;"/>
+                </h:form>
+                <br/>
+                <br/>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../resources/scripts/validate.js"></script>
+    <script type="text/javascript" src="../resources/scripts/drawingCanvas.js"></script>
+    <script type="text/javascript" src="../resources/scripts/onClickCoordinate.js"></script>
+    <script type="text/javascript" src="../resources/scripts/pointer.js"></script>
+    <script type="text/javascript" src="../resources/scripts/clickOnCanvas.js"></script>
+</h:body>
+</html>

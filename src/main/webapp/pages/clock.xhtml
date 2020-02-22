@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Камышников Владислав Р3201 Вариант 20173</title>
+    <link rel="stylesheet" href="http://localhost:8080/lab3-12/resources/css/style.css"/>
+    <link rel="stylesheet" href="http://localhost:8080/lab3-12/resources/css/clock.css"/>
+</h:head>
+<h:body class="box" onload="clock();">
+<div class="realBox">
+    <div class="header">P3201 Камышников Владислав Вариант 20173</div>
+</div>
+
+<div>
+    <div  id="clock" class="realBox" onclick="setTime();">Уточка ищет часы</div>
+</div>
+<div>
+    <div class="realBox" id="YXADI">
+<!--        <a href="welcome.xhtml">Ухадить</a>-->
+        <h:form>
+            <h:commandLink value="Ухадить" action="#{routerBean.routeOnWelcome()}"/>
+        </h:form>
+    </div>
+</div>
+<script type="text/javascript" src="http://localhost:8080/lab3-12/resources/scripts/clock.js"></script>
+</h:body>
+</html>

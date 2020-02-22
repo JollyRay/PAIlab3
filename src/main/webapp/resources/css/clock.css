@@ -1,0 +1,27 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 500px;
+    vertical-align: middle;
+    text-align: center;
+    width: 98%;
+}
+#clock{
+    width: 400px;
+    font-size: 72px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+}
+#YXADI{
+    width: min-content;
+    display: inline-block;
+}
+body>div{
+    vertical-align: middle;
+    text-align: center;
+}
+a {
+    width: max-content;
+}
